@@ -55,6 +55,13 @@
     </c:if>
 
 </div>
+</div>
 
+<div style="text-align:center; margin-top:20px; font-weight:bold; color:#555;">
+    Version: v1.0.0
+</div>
+
+</body>
+</html>
 </body>
 </html>
