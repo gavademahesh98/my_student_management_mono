@@ -2,12 +2,20 @@ pipeline{
     agent {
         label 'worker1'
     }
+    tools{
+        maven 'mvn'
+    }
     stages{
         stage('checkout'){
            steps{
              git branch: 'master' , url: 'https://github.com/gavademahesh98/student-management.git'
              echo 'Git Clonning Successfull'
            } 
+        }
+        stage('build'){
+            steps{
+                sh 'mvn clean install'
+            }
         }
     }
 }
