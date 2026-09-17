@@ -4,13 +4,11 @@ metadata:
   name: student-svc 
   labels: 
     app: student 
-  namespace: student
 spec: 
-  type: LoadBalancer
+  type: NodePort 
   selector: 
     app: student 
   ports: 
-    - name: student-svc-port
-      protocol: TCP 
-      port: 8080
+    - port: 8080
       targetPort: 8080
+      nodePort: 30001
