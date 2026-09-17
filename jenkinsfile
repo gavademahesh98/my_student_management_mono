@@ -1,0 +1,13 @@
+pipeline{
+    agent {
+        label 'worker1'
+    }
+    stages{
+        stage('checkout'){
+           steps{
+             git branch: 'master' , url='https://github.com/gavademahesh98/student-management.git'
+             echo 'Git Clonning Successfull'
+           } 
+        }
+    }
+}
