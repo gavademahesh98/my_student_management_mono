@@ -22,5 +22,10 @@ pipeline{
                 }
             }
         }
+        stage('push artifact to s3'){
+            steps{
+                sh 'aws s3 cp target/student-management.war s3://student-management-001/student-app/'
+            }
+        }
     }
 }
