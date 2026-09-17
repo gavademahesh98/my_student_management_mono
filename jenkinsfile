@@ -10,5 +10,11 @@ pipeline {
                 git 'https://github.com/gavademahesh98/student-management.git'
             }
         }
+
+        stage('build'){
+            steps{
+                 sh 'mvn clean package'
+            }
+        }
     }
 }
