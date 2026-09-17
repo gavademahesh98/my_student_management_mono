@@ -7,7 +7,6 @@ pipeline {
         maven 'mvn'
     }
 
-
     stages {
         stage('checkout'){
             steps{
