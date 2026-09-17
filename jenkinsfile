@@ -5,9 +5,9 @@ pipeline{
     tools{
         maven 'mvn'
     }
-
-    
-
+    environment{
+        AWS_CRED = credentials('aws-cred')
+    }
     stages{
         stage('checkout'){
             steps{
@@ -15,7 +15,6 @@ pipeline{
                 echo 'clonning is successfull'
             }
         }
-        
         stage('build'){
             steps{
                 sh 'mvn clean package'
@@ -25,6 +24,9 @@ pipeline{
                     archiveArtifacts artifacts: 'target/student-management.war' , fingerprint: true
                 }
             }
+        }
+        stage('artifacts to s3'){
+             sh 'aws s3 cp target/student-management.war s3://student-management-001/student-app/'
         }
     }
 }
