@@ -2,6 +2,9 @@ pipeline{
     agent {
         label 'worker1'
     }
+    tools{
+        maven 'mvn'
+    }
 
     
 
