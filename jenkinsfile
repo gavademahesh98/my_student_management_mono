@@ -2,12 +2,13 @@ pipeline {
     agent {
         label "worker1"
     }
-}
 
-    stages{
+
+    stages {
         stage('checkout'){
             steps{
-                git "https://github.com/gavademahesh98/student-management.git"
+                git 'https://github.com/gavademahesh98/student-management.git'
             }
         }
     }
+}
