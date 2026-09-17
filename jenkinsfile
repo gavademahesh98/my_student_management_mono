@@ -3,11 +3,19 @@ pipeline{
         label 'worker1'
     }
 
+    
+
     stages{
         stage('checkout'){
             steps{
                 git 'https://github.com/gavademahesh98/student-management.git'
                 echo 'clonning is successfull'
+            }
+        }
+        
+        stage('build'){
+            steps{
+                sh 'mvn clean package'
             }
         }
     }
