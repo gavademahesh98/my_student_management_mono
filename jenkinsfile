@@ -14,10 +14,28 @@ pipeline {
             }
         }
 
-        stage('build'){
-            steps{
-                 sh 'mvn clean package'
-            }
-        }
+        stage('build') {
+         steps {
+        sh '''
+            echo "===== JAVA ====="
+            which java
+            java -version
+
+            echo "===== JAVAC ====="
+            which javac
+            javac -version
+
+            echo "===== JAVA_HOME ====="
+            echo $JAVA_HOME
+
+            echo "===== MAVEN ====="
+            which mvn
+            mvn -version
+
+            echo "===== BUILD ====="
+            mvn clean package
+        '''
+    }
+}
     }
 }
