@@ -5,6 +5,9 @@ pipeline{
     tools{
         maven 'mvn'
     }
+    environment{
+        AWS_CRED = credentials('aws-cred')
+    }
     stages{
         stage('checkout'){
            steps{
