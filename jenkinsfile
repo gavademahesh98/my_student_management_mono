@@ -16,6 +16,11 @@ pipeline{
             steps{
                 sh 'mvn clean install'
             }
+            post{
+                success{
+                    archiveArtifacts artifacts: 'target/student-management.war' , fingerprint: true
+                }
+            }
         }
     }
 }
