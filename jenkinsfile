@@ -87,7 +87,7 @@ pipeline {
         }
         stage('docker-build'){
             steps{
-                sh 'docker build -t student-service:latest'
+                sh 'docker build -t student-service:latest .'
             }
         }
     }
