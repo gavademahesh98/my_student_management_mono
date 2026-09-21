@@ -20,7 +20,7 @@ pipeline {
             }
         }
 
-        stage('build war package') {
+        stage('maven-build') {
             steps {
                 sh '''
                 mvn clean package
@@ -85,6 +85,10 @@ pipeline {
                 sh 'aws s3 cp target/student-management.war s3://student-management-98/student-service/'
             }
         }
-
+        stage('docker-build'){
+            steps{
+                sh 'docker build -t student-service:latest'
+            }
+        }
     }
 }
