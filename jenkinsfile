@@ -1,0 +1,51 @@
+pipeline{
+    agent{
+        label 'worker1'
+    }
+    tools{
+        maven 'maven'
+    }
+    environment{
+        AWS_CRED=credentials('aws-cred')
+    }
+    stages{
+        stage('checkout'){
+            steps{
+            git branch: 'master' , url: 'https://github.com/gavademahesh98/student-management.git'
+            echo 'clonning is done'
+            }
+        }
+        stage('build war package'){
+            steps{
+                sh '''
+                mvn clean package
+                '''
+            }
+            post{
+                    success{
+                        archiveArtifacts artifacts: 'target/student-management.war' , fingerprint: true
+                    }
+                }
+        }
+        stage('code-scan'){
+            steps{
+                withSonarQubeEnv('sonar-server'){
+                    sh 'mvn sonar:sonar'
+                }
+
+            }
+        }
+        stage('quality-gate'){
+            steps{
+                timeout(time: 5 , unit: MINUTES){
+                   waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+        stage('push-artifact-s3'){
+            steps{
+                sh 'aws s3 cp target/student-management.war  s3://student-management-98/student-service/'
+            }
+        }
+    }
+}
