@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-deployment
+  labels:
+    app: student
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: student
+  template:
+    metadata:
+      labels:
+        app: student
+    spec:
+      - containers:
+          name: student-cont
+          image: 655887417250.dkr.ecr.ap-southeast-1.amazonaws.com/student-mono-app:latest
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
+        
+        resources:
+          requests:
+            cpu: '100m'
+            memory: '128Mi'
+          limits:
+            cpu: '200m'
+            memory: '256Mi'
+          
