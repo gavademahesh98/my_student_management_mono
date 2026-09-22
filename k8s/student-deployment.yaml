@@ -13,7 +13,7 @@ spec:
       maxUnavailable: 1
   selector:
     matchLabels:
-    app: student
+      app: student
   template:
     metadata:
       labels:
