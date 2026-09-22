@@ -5,7 +5,7 @@ metadata:
   labels:
     app: student
 spec:
-  type: Nodeport
+  type: NodePort
   ports:
     - port: 8080
       targetPort: 8080
