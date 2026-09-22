@@ -12,3 +12,4 @@ spec:
        nodePort: 30001
   selector:
     app: student
+

@@ -1,5 +1,5 @@
 pipeline{
-    agent{
+    agent {
         label 'worker1'
     }
     tools{
@@ -11,8 +11,7 @@ pipeline{
     stages{
         stage('checkout'){
             steps{
-            git branch: 'master' , url: 'https://github.com/gavademahesh98/student-management.git'
-            echo "clonning is successful"
+                git branch: 'master' , url: 'https://github.com/gavademahesh98/student-management.git'
             }
         }
         stage('terraform-init'){
@@ -30,5 +29,6 @@ pipeline{
                 sh 'terraform apply -auto-approve'
             }
         }
+
     }
 }

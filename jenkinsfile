@@ -2,8 +2,9 @@ pipeline{
     agent{
         label 'worker1'
     }
-    tools{
-        maven 'maven'
+
+    tools {
+        maven 'mvn'
     }
     environment{
         aws_cred=credentials('aws-cred')
@@ -103,5 +104,7 @@ pipeline{
                 '''
             }
         }
+
+        
     }
 }
