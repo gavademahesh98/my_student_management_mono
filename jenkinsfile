@@ -8,7 +8,7 @@ pipeline{
     }
     environment{
         aws_cred=credentials('aws-cred')
-        student_service_tag=${BUILD_NUMBER}
+        student_service_tag="${BUILD_NUMBER}"
     }
     stages{
         stage('checkout'){
