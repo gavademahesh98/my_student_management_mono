@@ -1,0 +1,35 @@
+pipeline{
+    agent{
+        label 'worker1'
+    }
+    tools{
+        terraform 'tf'
+    }
+    environment{
+        aws_cred=credentials('aws-cred')
+    }
+    stages{
+        stage('checkout'){
+            steps{
+            git branch: 'master' , url: 'https://github.com/gavademahesh98/my_student_management_mono.git'
+            echo "clonning is successfull"
+            }
+        }
+        stage('terraform-init'){
+            steps{
+                sh 'terraform init'
+            }
+        }
+        stage('terraform-validate'){
+            steps{
+                sh 'terraform validate'
+            }
+        }
+        stage('teraform-apply'){
+            steps{
+                sh 'terraform apply -auto-approve'
+            }
+        }
+
+    }
+}
