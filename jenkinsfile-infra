@@ -11,7 +11,7 @@ pipeline{
     stages{
         stage('checkout'){
             steps{
-                git branch: 'master' , url: 'https://github.com/gavademahesh98/student-management.git'
+                git branch: 'master' , url: 'https://github.com/gavademahesh98/my_student_management_mono.git'
                 echo "Clonning is successful"
             }
         }
