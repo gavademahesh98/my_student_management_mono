@@ -12,6 +12,7 @@ pipeline{
         stage('checkout'){
             steps{
                 git branch: 'master' , url: 'https://github.com/gavademahesh98/student-management.git'
+                echo "Clonning is successful"
             }
         }
         stage('terraform-init'){
