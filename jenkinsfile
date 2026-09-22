@@ -90,6 +90,7 @@ pipeline{
                 docker tag student-service:latest 655887417250.dkr.ecr.ap-southeast-1.amazonaws.com/student-service:latest
                 docker push 655887417250.dkr.ecr.ap-southeast-1.amazonaws.com/student-service:${student_service_tag}
                 docker push 655887417250.dkr.ecr.ap-southeast-1.amazonaws.com/student-service:latest
+                docker image prune -af
                 '''
             }
         }
