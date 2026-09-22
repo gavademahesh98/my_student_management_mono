@@ -7,6 +7,7 @@ pipeline{
     }
     environment{
         aws_cred=credentials('aws-cred')
+        student_service_tag=${BUILD_NUMBER}
     }
     stages{
         stage('checkout'){
@@ -84,8 +85,21 @@ pipeline{
             steps{
                 sh '''
                 aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 655887417250.dkr.ecr.ap-southeast-1.amazonaws.com
-                docker tag student-service:latest 655887417250.dkr.ecr.ap-southeast-1.amazonaws.com/student-service:${BUILD_NUMBER}
-                docker push 655887417250.dkr.ecr.ap-southeast-1.amazonaws.com/student-service:${BUILD_NUMBER}
+                docker tag student-service:latest 655887417250.dkr.ecr.ap-southeast-1.amazonaws.com/student-service:${student_service_tag}
+                docker push 655887417250.dkr.ecr.ap-southeast-1.amazonaws.com/student-service:${student_service_tag}
+                '''
+            }
+        }
+        stage('deployment-on-k8s'){
+            steps{
+                sh '''
+                    aws eks update-kubeconfig --name my-eks-cluster --region ap-southeast-1
+                    kubectl apply -f k8s/
+                    kubectl get pod
+                    sleep 30
+                    kubectl get pod
+                    kubectl get svc -o wide
+
                 '''
             }
         }
